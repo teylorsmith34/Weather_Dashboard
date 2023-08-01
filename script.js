@@ -17,11 +17,13 @@ form.addEventListener("submit", function (event) {
   getWeatherData(cityName);
 });
 
+//Function to convert kelvin to fahrenheit
 function kelvinToFahrenheit(kelvin) {
   let fahrenheit = (kelvin - 273.15) * (9 / 5) + 32;
   return fahrenheit.toFixed(2);
 }
 
+// Function to convert mps to mph
 function mpsToMph(mps) {
   let mph = mps * 2.23694;
   return mph.toFixed(2);
@@ -45,6 +47,9 @@ async function getWeatherData(cityName) {
 
 function displayCurrentWeather(city, weatherData) {
   currentWeatherContainer.innerHTML = "";
+  // const currentWeatherTitle = document.createElement("h2");
+  // currentWeatherTitle.textContent = "Current Weather";
+  // currentWeatherContainer.appendChild(currentWeatherTitle);
 
   const cityName = city.name;
   const date = new Date(weatherData.dt * 1000).toLocaleDateString();
@@ -84,6 +89,9 @@ function displayCurrentWeather(city, weatherData) {
 function displayForecast(forecastData) {
   // Clear previous forecast data
   forecastContainer.innerHTML = "";
+  const forecastTitle = document.createElement("h2");
+  forecastTitle.textContent = "5-Day Forecast:";
+  forecastContainer.appendChild(forecastTitle);
 
   for (let i = 0; i < 5; i++) {
     const forecast = forecastData[i];
@@ -121,7 +129,6 @@ function displayForecast(forecastData) {
     forecastElement.appendChild(temperatureElement);
     forecastElement.appendChild(humidityElement);
     forecastElement.appendChild(windSpeedElement);
-
     forecastContainer.appendChild(forecastElement);
   }
 }
@@ -137,7 +144,11 @@ function saveSearchHistory(cityName) {
   // Add the new city to the search history array
   searchHistory.push(cityName);
 
-  // Save the updated search history back to localStorage
+  searchHistory = Array.from(new Set(searchHistory));
+
+  // This limits the search history to the last 5 cities
+  searchHistory = searchHistory.slice(-5);
+
   localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
   displaySearchHistory();
@@ -152,6 +163,8 @@ function displaySearchHistory() {
   let searchHistory = localStorage.getItem("searchHistory");
 
   searchHistory = searchHistory ? JSON.parse(searchHistory) : [];
+
+  searchHistory.reverse();
 
   // Iterate over the search history
   for (let i = 0; i < searchHistory.length; i++) {
