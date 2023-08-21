@@ -25,7 +25,7 @@ function kelvinToFahrenheit(kelvin) {
 
 // Function to convert mps to mph
 function mpsToMph(mps) {
-  let mph = mps * 2.23694;
+  let mph = mps * 2.23;
   return mph.toFixed(2);
 }
 async function getWeatherData(cityName) {
@@ -135,13 +135,9 @@ function displayForecast(forecastData) {
 
 // Function to save the searched city in the search history
 function saveSearchHistory(cityName) {
-  // Retrieve existing search history from localStorage
   let searchHistory = localStorage.getItem("searchHistory");
-
   // Parse the search history from JSON to an array
   searchHistory = searchHistory ? JSON.parse(searchHistory) : [];
-
-  // Add the new city to the search history array
   searchHistory.push(cityName);
 
   searchHistory = Array.from(new Set(searchHistory));
@@ -150,20 +146,16 @@ function saveSearchHistory(cityName) {
   searchHistory = searchHistory.slice(-5);
 
   localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-
   displaySearchHistory();
 }
 
-// Function to display the search history
 function displaySearchHistory() {
   // Clear previous search history
   searchHistoryContainer.innerHTML = "";
 
-  // Retrieve the search history from localStorage
   let searchHistory = localStorage.getItem("searchHistory");
-
   searchHistory = searchHistory ? JSON.parse(searchHistory) : [];
-
+  // Displays most recent search history first
   searchHistory.reverse();
 
   // Iterate over the search history

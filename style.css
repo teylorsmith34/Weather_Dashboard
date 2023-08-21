@@ -18,12 +18,25 @@ h1 {
   margin-right: 10px;
 }
 
-#current-weather-container,
+#current-weather-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #323d4e;
+  color: #fff;
+}
 #forecast-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .forecast-item {
@@ -32,6 +45,9 @@ h1 {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #323d4e;
+  color: #fff;
+  text-align: center;
 }
 
 #search-history-container {
