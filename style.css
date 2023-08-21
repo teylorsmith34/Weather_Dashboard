@@ -29,6 +29,9 @@ h1 {
   background-color: #323d4e;
   color: #fff;
 }
+#current-weather-container > * {
+  margin: 5px;
+}
 #forecast-container {
   display: flex;
   flex-wrap: wrap;
